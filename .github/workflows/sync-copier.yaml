@@ -5,9 +5,6 @@ on:
         - cron: '0 0 * * *'
     workflow_dispatch:
 
-env:
-    GH_HOST: github.com
-
 jobs:
     sync-copier-template:
         name: Sync Copier template
@@ -18,7 +15,6 @@ jobs:
               run: |
                 git config --global user.name "CopierUpdate[bot]"
                 git config --global user.email "copierupdate[bot]@users.noreply.github.com"
-                git config --global url.https://${{ github.token }}@${{ env.GH_HOST }}/.insteadOf https://${{ env.GH_HOST }}/
             - name: Update _src_path to online template
               uses: mikefarah/yq@v4
               with:
@@ -47,7 +43,10 @@ jobs:
                 poetry lock --no-update
                 poetry install --only copier --no-interaction --no-root
             # Sync template
-            - run: |
+            - name: Sync template
+              env:
+                GH_TOKEN: ${{ github.token }}
+              run: |
                 poetry run copier update --skip-answered
                 git add .
                 git diff --quiet || git checkout -b copier-update && \
