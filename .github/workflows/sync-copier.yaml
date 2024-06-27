@@ -5,6 +5,9 @@ on:
         - cron: '0 0 * * *'
     workflow_dispatch:
 
+env:
+    SOURCE_TEMPLATE_URL: https://github.com/wtenbrink/copier-python-template/tree/master # URL of the online template, replace with your own
+
 jobs:
     sync-copier-template:
         name: Sync Copier template
@@ -18,7 +21,7 @@ jobs:
             - name: Update _src_path to online template
               uses: mikefarah/yq@v4
               with:
-                cmd: yq -i '._src_path = "https://github.com/wtenbrink/copier-python-template"' '.copier-answers.yml'
+                cmd: yq -i '._src_path = "${{ env.SOURCE_TEMPLATE_URL }}"' '.copier-answers.yml'
             - uses: actions/setup-python@v4
               with:
                   python-version-file: pyproject.toml
