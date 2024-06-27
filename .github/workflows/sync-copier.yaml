@@ -5,12 +5,20 @@ on:
         - cron: '0 0 * * *'
     workflow_dispatch:
 
+env:
+    GH_HOST: github.com
+
 jobs:
     sync-copier-template:
         name: Sync Copier template
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+            - name: Configure git
+              run: |
+                git config --global user.name "CopierUpdate[bot]"
+                git config --global user.email "copierupdate[bot]@users.noreply.github.com"
+                git config --global url.https://${{ env.GITHUB_TOKEN }}@${{ env.GH_HOST }}/.insteadOf https://${{ env.GH_HOST }}/
             - name: Update _src_path to online template
               uses: mikefarah/yq@v4
               with:
