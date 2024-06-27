@@ -11,10 +11,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - name: Configure git
-              run: |
-                git config --global user.name "CopierUpdate[bot]"
-                git config --global user.email "copierupdate[bot]@users.noreply.github.com"
             - name: Update _src_path to online template
               uses: mikefarah/yq@v4
               with:
