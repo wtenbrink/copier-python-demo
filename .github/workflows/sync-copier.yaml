@@ -52,9 +52,9 @@ jobs:
                 git commit -m "Update _src_path to online template and update lockfile"
                 
                 poetry run copier update --skip-answered
-                git add .
                 
                 git diff --quiet || git checkout -b copier-update && \
+                git add . && \
                 git commit -m "Sync Copier template" && \
                 git push origin copier-update && \
                 gh pr create --title "Sync Copier template" --body "Sync Copier template" --base ${{ github.ref_name }} --head copier-update
