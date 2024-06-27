@@ -13,8 +13,8 @@ jobs:
             - uses: actions/checkout@v4
             - name: Configure git
               run: |
-                # git config --global user.name "CopierUpdate[bot]"
-                # git config --global user.email "copierupdate[bot]@users.noreply.github.com"
+                git config --global user.name "Copier update workflow"
+                git config --global user.email "copierupdateworkflow@users.noreply.github.com"
             - name: Update _src_path to online template
               uses: mikefarah/yq@v4
               with:
@@ -54,7 +54,7 @@ jobs:
                     git push origin copier-update
                 fi
                 
-                # poetry run copier update --skip-answered
+                poetry run copier update --skip-answered
                 
                 if [[ "$(git status --porcelain)" ]]; then
                   if [[ "$(git rev-parse --abbrev-ref HEAD)" != "copier-update" ]]; then
@@ -63,7 +63,6 @@ jobs:
                   git add .
                   git commit -m "Sync Copier template"
                   git push origin copier-update
-                  gh pr create --title "Sync Copier template" --body "Sync Copier template" --base ${{ github.ref_name }} --head copier-update
                 fi
 
                 if [[ "$(git rev-parse --abbrev-ref HEAD)" == "copier-update" ]]; then
