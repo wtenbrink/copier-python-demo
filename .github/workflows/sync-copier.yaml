@@ -11,6 +11,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+            - name: Configure git
+              run: |
+                # git config --global user.name "CopierUpdate[bot]"
+                # git config --global user.email "copierupdate[bot]@users.noreply.github.com"
             - name: Update _src_path to online template
               uses: mikefarah/yq@v4
               with:
@@ -50,7 +54,7 @@ jobs:
                     git push origin copier-update
                 fi
                 
-                poetry run copier update --skip-answered
+                # poetry run copier update --skip-answered
                 
                 if [[ "$(git status --porcelain)" ]]; then
                   if [[ "$(git rev-parse --abbrev-ref HEAD)" != "copier-update" ]]; then
