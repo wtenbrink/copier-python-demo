@@ -14,7 +14,7 @@ jobs:
             - name: Update _src_path to online template
               uses: mikefarah/yq@v4
               with:
-                cmd: yq -i '._src_path = https://github.com/wtenbrink/copier-python-template' '.copier-answers.yml'
+                cmd: yq -i '._src_path = "https://github.com/wtenbrink/copier-python-template"' '.copier-answers.yml'
             - uses: actions/setup-python@v4
               with:
                   python-version-file: pyproject.toml
