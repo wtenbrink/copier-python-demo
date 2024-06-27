@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier;
 _commit: 020a52a
-_src_path: copier-python-template
+_src_path: https://github.com/wtenbrink/copier-python-template
 project_description: Demo project from the Copier Python Template
 project_name: Copier Python Demo
