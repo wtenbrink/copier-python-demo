@@ -36,6 +36,7 @@ jobs:
               id: install-copier-dependencies
               if: steps.cached-copier-dependencies.outputs.cache-hit != 'true'
               run: |
+                poetry lock --no-update
                 poetry install --only copier --no-interaction --no-root
             # Sync template
             - run: |
