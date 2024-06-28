@@ -2,4 +2,4 @@
 
 Demo project from the Copier Python Template
 
-<!-- other stuff -->
+Project created by copier-python-template.
