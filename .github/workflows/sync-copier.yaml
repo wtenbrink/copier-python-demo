@@ -54,7 +54,7 @@ jobs:
                     git checkout -b ${{ env.PR_BRANCH }}
                     git add .
                     git commit -m "Update lockfile"
-                    git push origin ${{ env.PR_BRANCH }}
+                    git push -f origin ${{ env.PR_BRANCH }}
                 fi
                 
                 poetry run copier update --skip-answered
